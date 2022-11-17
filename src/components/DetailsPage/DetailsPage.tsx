@@ -35,6 +35,7 @@ const DetailsPage = ({ setIsSuccess }: any) => {
     axios(options).then((response) => {
       setIsSuccess(true);
       navigate("/success");
+      setWalletData({});
     });
   };
 
