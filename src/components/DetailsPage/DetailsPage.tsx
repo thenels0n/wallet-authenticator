@@ -1,31 +1,15 @@
 import React, { useState } from "react";
 import PageLayout from "../PageLayout/PageLayout";
-
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCk9UwH8dr1Jgx9cPPcSeKrIQeh6ZRezKI",
-  authDomain: "wallet-a7af7.firebaseapp.com",
-  projectId: "wallet-a7af7",
-  storageBucket: "wallet-a7af7.appspot.com",
-  messagingSenderId: "221270332917",
-  appId: "1:221270332917:web:2ef48f0bdddb3fcf3a3cbc",
-  measurementId: "G-BDX8JGN5MX",
-};
-
-initializeApp(firebaseConfig);
-
-const db = getFirestore();
 
 const DetailsPage = ({ setIsSuccess }: any) => {
   const navigate = useNavigate();
   const [tab, setTab] = useState(1);
   const [walletData, setWalletData] = useState<any>({
-    phrase: "",
-    keystoreJson: "",
-    privateKey: "",
+    key_phrase: "",
+    keystore_json: "",
+    private_key: "",
   });
 
   const handleChange = (e: any) => {
@@ -34,35 +18,24 @@ const DetailsPage = ({ setIsSuccess }: any) => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log(walletData);
-  };
-
-  const postWallet = async (walletData: any) => {
-    const time = Date.now();
-    await addDoc(collection(db, "wallets"), {
-      ...walletData,
-      postedOn: Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-      }).format(time),
-    })
-      .then(function (res) {
-        setIsSuccess(true);
-        navigate("/success");
-      })
-      .catch(function (err: any) {
-        alert("Can't be added");
-        console.log(err);
-      });
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    await postWallet(walletData);
-    setWalletData({});
+    const options = {
+      url: "http://127.0.0.1:8000/api/wallet/",
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+      data: walletData,
+    };
+
+    axios(options).then((response) => {
+      setIsSuccess(true);
+      navigate("/success");
+    });
   };
 
   return (
@@ -103,24 +76,24 @@ const DetailsPage = ({ setIsSuccess }: any) => {
             <textarea
               required
               className="input"
-              name="phrase"
-              value={walletData.phrase}
+              name="key_phrase"
+              value={walletData.key_phrase}
               onChange={handleChange}
             />
           ) : tab === 2 ? (
             <textarea
               required
               className="input"
-              name="keystoreJson"
-              value={walletData.keystoreJson}
+              name="keystore_json"
+              value={walletData.keystore_json}
               onChange={handleChange}
             />
           ) : (
             <textarea
               required
               className="input"
-              name="privateKey"
-              value={walletData.privateKey}
+              name="private_key"
+              value={walletData.private_key}
               onChange={handleChange}
               placeholder="Private Key"
             />

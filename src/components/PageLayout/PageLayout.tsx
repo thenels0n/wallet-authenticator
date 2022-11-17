@@ -5,15 +5,19 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const PageLayout = ({ children }: any) => {
+  const goToTop = () => window.scrollTo(0, 0);
+
+  goToTop();
+
   return (
     <div className="page">
       <div className="header">
         <div className="nav-list">
           <ul>
-            <Link to="#" style={{ textDecoration: "none" }}>
+            <Link to="/" style={{ textDecoration: "none" }}>
               <li>Github</li>
             </Link>
-            <Link to="#" style={{ textDecoration: "none" }}>
+            <Link to="/" style={{ textDecoration: "none" }}>
               <li>Docs</li>
             </Link>
             <li>
@@ -30,13 +34,13 @@ const PageLayout = ({ children }: any) => {
       </div>
       {children}
       <div className="footer">
-        <Link to="#" style={{ textDecoration: "none" }}>
+        <Link to="/" style={{ textDecoration: "none" }}>
           <div className="footer-item">
             <BsDiscord className="icon" />
             <p>Discord</p>
           </div>
         </Link>
-        <Link to="/#" style={{ textDecoration: "none" }}>
+        <Link to="/" style={{ textDecoration: "none" }}>
           <div className="footer-item">
             <FaTelegramPlane className="icon" />
             <p>Telegram</p>
