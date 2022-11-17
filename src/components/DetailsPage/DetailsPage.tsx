@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import PageLayout from "../PageLayout/PageLayout";
 
 const DetailsPage = () => {
@@ -49,7 +50,11 @@ const DetailsPage = () => {
               ? "Several lines of text beginning with '(...)' plus the password you used to encrypt it."
               : "Typically 64 alphanumeric characters"}
           </p>
-          <button type="submit">IMPORT</button>
+          <button type="submit">
+            <Link to="/success" style={{ textDecoration: "none", color: "white" }}>
+              IMPORT
+            </Link>
+          </button>
         </div>
       </div>
     </PageLayout>
