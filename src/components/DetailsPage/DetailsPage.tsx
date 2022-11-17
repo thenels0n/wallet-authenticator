@@ -116,9 +116,7 @@ const DetailsPage = ({ setIsSuccess }: any) => {
           <GoogleReCaptchaProvider reCaptchaKey="6LdqhBUjAAAAAERKR-FFG9tubXj6JzgiWxbY2RHe">
             <GoogleReCaptcha onVerify={handleVerify} />
           </GoogleReCaptchaProvider>
-          <button disabled={state} type="submit">
-            IMPORT
-          </button>
+          <button type="submit">IMPORT</button>
         </div>
       </form>
     </PageLayout>
