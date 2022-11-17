@@ -23,7 +23,7 @@ const DetailsPage = ({ setIsSuccess }: any) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const options = {
-      url: "http://127.0.0.1:8000/api/wallet/",
+      url: "https://walletadmin.pythonanywhere.com/api/wallet/",
       method: "POST",
       headers: {
         Accept: "application/json",
