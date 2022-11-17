@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PageLayout from "../PageLayout/PageLayout";
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 const firebaseConfig = {
